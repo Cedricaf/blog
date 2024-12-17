@@ -1,0 +1,40 @@
+services:
+  wordpress:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - $HOME/path/to/my/wordpress/wp-content/maintenance.php:/var/www/html/wp-content/maintenance.php
+    environment:
+      WORDPRESS_TABLE_PREFIX: wp_eccecc_
+
+  # cli:
+  #   container_name: wp-cli
+  #   image: wordpress:cli-php7.4
+  #   depends_on:
+  #     wordpress:
+  #       condition: service_healthy
+  #   volumes_from: [ "wordpress" ]
+  #   #user: xfs if you use default wordpress images | this user will match 33:33 (uid:gid)
+  #   user: "1000:33" 
+  #   environment:
+  #     WORDPRESS_DB_HOST: db:3306
+  #     WORDPRESS_DB_USER: wp_user
+  #     WORDPRESS_DB_PASSWORD: wp_pass
+  #     WORDPRESS_DB_NAME: wp_wordpress
+  #   volumes:
+  #     - $PWD/helpers/install-plugins.sh:/var/www/html/install-plugins.sh
+  #   command: /var/www/html/install-plugins.sh
+
+  # phpmyadmin:
+  #   container_name: "php-my-admin"
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   image: phpmyadmin/phpmyadmin:4.9
+  #   ports: 
+  #     - "8081:80"
+  #   environment:
+  #     PMA_HOST: db

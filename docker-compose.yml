@@ -1,0 +1,47 @@
+version: '2.4'
+
+services:
+  db:
+    container_name: "wp-mysql"
+    image: mariadb:10
+    healthcheck:
+      test: mysqladmin -uwp_user -pwp_pass ping -h 127.0.0.1
+    volumes:
+      - database:/var/lib/mysql
+      - ${PWD}/dump:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    environment: # the mysql user is 'root'
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: wp_wordpress
+      MYSQL_USER: wp_user
+      MYSQL_PASSWORD: wp_pass
+
+  wordpress:
+    container_name: "wp-site"
+    depends_on:
+      db:
+        condition: service_healthy
+    image: fsg/wordpress
+    build:
+      context: .
+      dockerfile: Dockerfile.website
+      args:
+        user_id: ${UID:-1000}
+    volumes:
+      - wordpress:/var/www/html
+      - ${THEMES_DIR:-./wp-content/themes}:/var/www/html/wp-content/themes
+      - ${PLUGINS_DIR:-./wp-content/plugins}:/var/www/html/wp-content/plugins
+      - ${UPLOADS_DIR:-./wp-content/uploads}:/var/www/html/wp-content/uploads
+    ports:
+      - "8000:80"
+    restart: unless-stopped
+    environment:
+      WP_ENV: "local"
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_pass
+      WORDPRESS_DB_NAME: wp_wordpress
+
+volumes:
+    database:
+    wordpress:

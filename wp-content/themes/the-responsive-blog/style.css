@@ -1,0 +1,98 @@
+/*
+Theme Name: The Responsive Blog
+Author: DiThemes
+Author URI: https://dithemes.com
+Description: Responsive, Fast, SEO Friendly and Fully customizable Theme. The Responsive Blog is the perfect theme for eye-catching business websites and blogs. it is a child theme of Di Blog theme, so you will get all the features of Di Blog theme with an additional top bar section. Top bar section is totally customizable, where you can hide or display contents according to need. The Responsive Blog theme is the best friend of page builder like Elementor and WooCommerce plugin, so you can create eye-catching web pages and sell products through websites. Theme features: #SEO Friendly, #Fast loading, 100% Responsive, #One click demo import, #Typography options, #Customizable blog, #Responsive Main Menu, Top bar section, #Social icons, Front page #slider, Sidebar menu, #WooCommerce ready and options, Footer #widgets and layout, #Footer copyright section, #Sticky menu, Back to top icon, Page loading icon, Friend of page builder plugins, Compatible with all popular plugins and much more. #DEMO: http://demo.dithemes.com/di-blog/
+Version: 1.1
+Requires at least: 5.2
+Tested up to: 6.5
+Requires PHP: 7.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: one-column, two-columns, left-sidebar, right-sidebar, grid-layout, flexible-header, custom-background, custom-colors, custom-header, custom-menu, editor-style, custom-logo, featured-images, footer-widgets, full-width-template, microformats, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, wide-blocks, blog, portfolio, e-commerce
+Text Domain: the-responsive-blog
+Template: di-blog
+*/
+
+.container-fluid.topbar {
+	font-size: 14px;
+	padding: 8px 0;
+	background-color: #ae8400;
+	color: #fff;
+	letter-spacing: 1px;
+}
+
+@media screen and (max-width: 767px) {
+
+	.container-fluid.topbar {
+		padding-bottom: 16px;
+	}
+}
+
+.container-fluid.topbar a {
+	color: #fff;
+}
+
+.container-fluid.topbar a:hover {
+	color: #fff;
+}
+
+.container-fluid.topbar .topbar-first-col-md-6 p {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+
+@media screen and (max-width: 767px) {
+	.container-fluid.topbar .topbar-first-col-md-6 p {
+		text-align: center;
+	}
+
+	.col-md-6.topbar-last-col-md-6 .top-bar-menu-class {
+		padding-top: 12px;
+	}
+}
+
+.the-responsive-blog-sep {
+	padding-left: 8px;
+}
+
+ul.top-bar-menu-class {
+	list-style-type: circle;
+	margin: 0;
+	padding: 0;
+	text-align: right;
+}
+
+@media screen and (max-width: 767px) {
+	ul.top-bar-menu-class {
+		text-align: center;
+	}
+}
+
+ul.top-bar-menu-class li {
+	display: inline list-item;
+	padding-left: 10px;
+}
+
+ul.top-bar-menu-class li a {
+  position: relative;
+  text-decoration: none;
+}
+
+ul.top-bar-menu-class li a::before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 1px;
+	bottom: -2px;
+	left: 0;
+	background-color: #fff;
+	transform: scaleX(0);
+	transition: transform 0.3s ease;
+}
+
+ul.top-bar-menu-class li a:hover::before {
+	transform: scaleX(1);
+}

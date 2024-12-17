@@ -1,0 +1,16 @@
+# ./.tmuxinator.yml
+# launch this with `tmuxinator -s theme=ONLY_THE_NAME_OF_THEME_FOLDER`
+
+name: <%= @settings["theme"] %>
+root: <%= ENV["PWD"] %>
+
+on_project_first_start: sudo systemctl start docker
+
+on_project_stop: docker-compose down
+
+startup_window: docker
+
+windows:
+  - git: [cd wp-content/themes/<%= @settings["theme"] %>, git fetch --all ]
+  - docker: ["systemctl status docker", "q", "docker-compose up -d"]
+  - theme: [cd wp-content/themes/<%= @settings["theme"] %>, lsta ]
